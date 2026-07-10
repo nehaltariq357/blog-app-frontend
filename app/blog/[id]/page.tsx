@@ -25,7 +25,7 @@ export default async function BlogPage({
 
 
   const post = await getPost(id);
-  console.log("posst", post);
+  console.log("post", post);
 
 if(!post.content){
  return <div>Post not found</div>

@@ -1,1 +1,50 @@
 @import "tailwindcss";
+
+
+
+
+.ProseMirror{
+
+min-height:300px;
+
+outline:none;
+
+}
+
+
+.ProseMirror h1{
+
+font-size:2rem;
+font-weight:bold;
+
+}
+
+
+.ProseMirror h2{
+
+font-size:1.5rem;
+font-weight:bold;
+
+}
+
+
+.ProseMirror code{
+
+background:#eee;
+
+padding:4px;
+
+}
+
+
+.ProseMirror pre{
+
+background:#111;
+
+color:white;
+
+padding:15px;
+
+border-radius:8px;
+
+}
