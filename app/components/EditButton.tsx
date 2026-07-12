@@ -1,12 +1,23 @@
-import Link from "next/link";
+"use client";
 
-export default function EditButton({ id }: { id: number }) {
-    return (
-        <Link
-            href={`/blog/edit/${id}`}
-            className="bg-blue-500 text-white px-4 py-2 rounded"
-        >
-            Edit
-        </Link>
-    );
+import { useRouter } from "next/navigation";
+
+export default function EditButton({
+  slug,
+}: {
+  slug: string;
+}) {
+  const router = useRouter();
+
+  console.log("slug",slug)
+
+
+  return (
+    <button
+      onClick={() => router.push(`/blog/edit/${slug}`)}
+      className="rounded border px-4 py-2"
+    >
+      Edit
+    </button>
+  );
 }

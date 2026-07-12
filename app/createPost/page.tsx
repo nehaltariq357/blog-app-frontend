@@ -52,7 +52,7 @@ console.log(data);
 
 
 if(res.ok){
- router.push(`/blog/${data.id}`);
+ router.push(`/blog/${data.slug}`);
 }
 
 

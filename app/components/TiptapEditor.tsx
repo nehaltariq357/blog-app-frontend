@@ -7,112 +7,118 @@ import StarterKit from "@tiptap/starter-kit";
 import Placeholder from "@tiptap/extension-placeholder";
 import Link from "@tiptap/extension-link";
 import Image from "@tiptap/extension-image";
-
 import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight";
 
 import { createLowlight, common } from "lowlight";
-
 import { useEffect } from "react";
 
 
 const lowlight = createLowlight(common);
 
 
-
 export default function TiptapEditor({
-content,
-onChange,
-}:{
-content:string;
-onChange:(value:string)=>void;
-}){
+    content,
+    onChange,
+}: {
+    content: string;
+    onChange: (value: string) => void;
+}) {
 
 
-const editor = useEditor({
+    const editor = useEditor({
 
-extensions:[
+        extensions: [
 
+            StarterKit.configure({
 
-StarterKit.configure({
+                link: false,
 
-codeBlock:false,
+                codeBlock: false,
 
-}),
-
-
-Placeholder.configure({
-
-placeholder:"Start writing your blog..."
-
-}),
+            }),
 
 
-Link.configure({
+            Placeholder.configure({
 
-openOnClick:false,
+                placeholder: "Start writing your blog..."
 
-}),
-
-
-Image,
+            }),
 
 
-CodeBlockLowlight.configure({
+            Link.configure({
 
-lowlight,
+                openOnClick: false,
 
-}),
-
-
-],
+            }),
 
 
-content:content || "",
+            Image,
 
 
-onUpdate:({editor})=>{
+            CodeBlockLowlight.configure({
 
-onChange(editor.getHTML());
+                lowlight,
 
-}
-
-
-});
+            }),
 
 
+        ],
 
-useEffect(()=>{
 
-if(editor && content){
+        // empty initialize
+        content: "",
 
-editor.commands.setContent(content);
 
-}
+        onUpdate: ({ editor }) => {
 
-},[editor,content]);
+            onChange(editor.getHTML());
+
+        },
+
+
+        immediatelyRender: false,
+
+    });
 
 
 
-if(!editor){
+    // load old content in edit mode
+    useEffect(() => {
 
-return null;
-
-}
-
+        if (!editor) return;
 
 
-return (
+        if (content) {
 
-<div className="border rounded p-4">
+            editor.commands.setContent(content);
 
-<Toolbar editor={editor}/>
-
-
-<EditorContent editor={editor}/>
+        }
 
 
-</div>
+    }, [editor, content]);
 
-)
+
+
+    if (!editor) {
+
+        return null;
+
+    }
+
+
+    return (
+
+        <div className="border rounded p-4">
+
+
+            <Toolbar editor={editor} />
+
+
+            <EditorContent editor={editor} />
+
+
+        </div>
+
+    );
 
 }

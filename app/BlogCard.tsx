@@ -32,7 +32,7 @@ return (
 
 <Link
 
-href={`/blog/${post.id}`}
+href={`/blog/${post.slug}`}
 
 className="text-blue-500"
 
