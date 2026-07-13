@@ -2,6 +2,7 @@
 
 import { Editor } from "@tiptap/react";
 import { useState } from "react";
+import { useRef } from "react";
 
 
 export default function Toolbar({
@@ -9,10 +10,45 @@ export default function Toolbar({
 }: {
   editor: Editor;
 }) {
-
+  
+  const inputRef = useRef<HTMLInputElement>(null);
 
 const [url,setUrl] = useState("");
 
+async function handleImage(
+  e: React.ChangeEvent<HTMLInputElement>
+) {
+  const file = e.target.files?.[0];
+
+  if (!file) return;
+
+  const formData = new FormData();
+
+  formData.append("file", file);
+
+  formData.append(
+    "upload_preset",
+    "blog_upload1"
+  );
+
+  const res = await fetch(
+    "https://api.cloudinary.com/v1_1/saz161ir/image/upload",
+    {
+      method: "POST",
+      body: formData,
+    }
+  );
+
+  const data = await res.json();
+
+  editor
+    ?.chain()
+    .focus()
+    .setImage({
+      src: data.secure_url,
+    })
+    .run();
+}
 
 
 const addLink = ()=>{
@@ -280,7 +316,35 @@ editor.isActive("codeBlock")
 
 </button>
 
+{/* // Image */}
 
+<button
+  type="button"
+  onClick={() => {
+    const url = window.prompt("Image URL");
+
+    if (url) {
+      editor.chain().focus().setImage({ src: url }).run();
+    }
+  }}
+>
+  Image
+</button>
+
+<input
+  ref={inputRef}
+  type="file"
+  accept="image/*"
+  hidden
+  onChange={handleImage}
+/>
+
+<button
+  type="button"
+  onClick={() => inputRef.current?.click()}
+>
+  Image
+</button>
 
 </div>
 

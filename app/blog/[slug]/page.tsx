@@ -93,6 +93,15 @@ export default async function BlogPage({
       </div>
 
       <BlogContent content={post.content} />
+      {post.thumbnail && (
+        <div className="my-4">
+          <img
+            src={post.thumbnail}
+            alt={post.title}
+            className="w-full h-auto rounded-lg"
+          />
+        </div>
+      )}
       <LikeButton postId={post.id} />
 
       {/* <LikeCount postId={post.id} /> */}
