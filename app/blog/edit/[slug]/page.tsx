@@ -84,72 +84,89 @@ export default function EditPost() {
   }
 
   if (loading) {
-    return <h1 className="text-center mt-10">Loading...</h1>;
+    return (
+      <div className="min-h-screen bg-[#F6F5F1] flex items-center justify-center">
+        <h1 className="font-mono text-sm uppercase tracking-wide text-[#6F6E67]">
+          Loading…
+        </h1>
+      </div>
+    );
   }
 
   return (
-    <div className="max-w-4xl mx-auto py-10 px-5">
-      <h1 className="text-3xl font-bold mb-6">
-        Edit Blog
-      </h1>
+    <div className="min-h-screen bg-[#F6F5F1]">
+      <div className="max-w-3xl mx-auto py-14 px-6">
+        <span className="inline-block font-mono text-[10.5px] uppercase tracking-wider text-[#B5362A] border border-[#B5362A] rounded-sm px-2 py-1 -rotate-2 mb-4">
+          Editing
+        </span>
 
-      <input
-        className="border p-3 w-full mb-5 rounded"
-        placeholder="Post title"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-      />
+        <h1 className="font-serif font-bold text-3xl text-[#1A1917] mb-8">
+          Edit Blog
+        </h1>
 
-      <div className="mb-5">
-        <select
-          value={visibility}
-          onChange={(e) => setVisibility(e.target.value)}
-          className="border p-2 rounded"
-        >
-          <option value="PUBLIC">Public</option>
-          <option value="PRIVATE">Private</option>
-        </select>
+        <div className="border border-[#DEDBD2] rounded-sm bg-white">
+          <div className="p-6 md:p-8">
+            <input
+              className="w-full font-serif font-bold text-2xl text-[#1A1917] placeholder:text-[#c8c5ba] outline-none mb-6 pb-4 border-b border-[#DEDBD2]"
+              placeholder="Post title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+
+            <div className="mb-8 flex items-center gap-3">
+              <span className="font-mono text-[10.5px] uppercase tracking-wide text-[#6F6E67]">
+                Visibility
+              </span>
+              <select
+                value={visibility}
+                onChange={(e) => setVisibility(e.target.value)}
+                className="border border-[#DEDBD2] text-sm px-3 py-1.5 rounded-full bg-[#F6F5F1] text-[#1A1917] outline-none"
+              >
+                <option value="PUBLIC">Public</option>
+                <option value="PRIVATE">Private</option>
+              </select>
+            </div>
+
+            {/* Current Thumbnail */}
+            <div className="mb-8">
+              <h2 className="font-mono text-[10.5px] uppercase tracking-wide text-[#6F6E67] mb-3">
+                Featured Image
+              </h2>
+
+              {thumbnail ? (
+                <img
+                  src={thumbnail}
+                  alt="Thumbnail"
+                  className="w-full h-72 object-cover rounded-sm border border-[#DEDBD2] mb-4"
+                />
+              ) : (
+                <p className="text-sm text-[#6F6E67] mb-4">
+                  No image uploaded
+                </p>
+              )}
+
+              <ImageUpload onUpload={setThumbnail} />
+
+              <p className="text-xs text-[#6F6E67] mt-2">
+                Upload a new image only if you want to replace the current one.
+              </p>
+            </div>
+
+            <div className="mb-2">
+              <TiptapEditor content={content} onChange={setContent} />
+            </div>
+          </div>
+
+          <div className="flex justify-end px-6 md:px-8 py-4 border-t border-[#DEDBD2] bg-[#F6F5F1]">
+            <button
+              onClick={handleUpdate}
+              className="bg-[#B5362A] hover:bg-[#93281e] text-white text-sm font-medium px-6 py-3 rounded-full transition-colors"
+            >
+              Update Post
+            </button>
+          </div>
+        </div>
       </div>
-
-      {/* Current Thumbnail */}
-
-      <div className="mb-6">
-        <h2 className="font-semibold mb-2">
-          Featured Image
-        </h2>
-
-        {thumbnail ? (
-          <img
-            src={thumbnail}
-            alt="Thumbnail"
-            className="w-full h-72 object-cover rounded-lg border mb-4"
-          />
-        ) : (
-          <p className="text-gray-500 mb-4">
-            No image uploaded
-          </p>
-        )}
-
-        <ImageUpload onUpload={setThumbnail} />
-
-        <p className="text-sm text-gray-500 mt-2">
-          Upload a new image only if you want to replace the current one.
-        </p>
-      </div>
-
-      <div className="mb-6">
-        <TiptapEditor
-          content={content}
-          onChange={setContent}
-        />
-      </div>
-
-      <button
-        onClick={handleUpdate}
-        className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded"
-      >
-        Update Post
-      </button>
     </div>
   );
 }

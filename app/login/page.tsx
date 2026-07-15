@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 const Login = () => {
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -12,122 +11,99 @@ const Login = () => {
 
   const router = useRouter();
 
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-
     e.preventDefault();
 
     setError("");
 
-
     try {
+      const response = await fetch("http://localhost:5000/api/login", {
+        method: "POST",
 
-      const response = await fetch(
-        "http://localhost:5000/api/login",
-        {
-          method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
 
-          headers:{
-            "Content-Type":"application/json",
-          },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
 
-          body: JSON.stringify({
-            email,
-            password,
-          }),
-
-          // JWT cookies ke liye
-          credentials:"include",
-        }
-      );
-
+        // JWT cookies ke liye
+        credentials: "include",
+      });
 
       const data = await response.json();
 
-
-      if(!response.ok){
-
-        setError(
-          data.message || "Login failed"
-        );
+      if (!response.ok) {
+        setError(data.message || "Login failed");
 
         return;
       }
 
-
-      console.log(
-        "Login success:",
-        data
-      );
-
+      console.log("Login success:", data);
 
       // login successful
-      router.push("/createPost");
-
+      router.push("/blog");
 
       setEmail("");
       setPassword("");
+    } catch (err) {
+      console.log("Login error:", err);
 
-
-    } catch(err){
-
-      console.log(
-        "Login error:",
-        err
-      );
-
-      setError(
-        "Something went wrong"
-      );
-
+      setError("Something went wrong");
     }
-
   };
 
-
   return (
+    <div className="min-h-screen bg-[#F6F5F1] flex items-center justify-center px-6">
+      <form onSubmit={handleSubmit} className="w-full max-w-[380px] text-center">
+        <div className="font-serif italic font-bold text-[34px] text-[#1A1917] mb-1.5">
+          Margin<span className="text-[#B5362A]">al</span>
+        </div>
+        <p className="text-[13px] text-[#6F6E67] mb-8">
+          Sign in to write, publish, and annotate.
+        </p>
 
-    <form onSubmit={handleSubmit}>
+        <div className="text-left mb-4">
+          <label className="block font-mono text-[10.5px] uppercase tracking-wide text-[#6F6E67] mb-1.5">
+            Email
+          </label>
+          <input
+            type="email"
+            placeholder="you@example.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="w-full px-3 py-2.5 border border-[#DEDBD2] rounded-sm bg-white text-sm outline-none focus:border-[#B5362A]"
+          />
+        </div>
 
-      <h1>
-        Login
-      </h1>
+        <div className="text-left mb-2">
+          <label className="block font-mono text-[10.5px] uppercase tracking-wide text-[#6F6E67] mb-1.5">
+            Password
+          </label>
+          <input
+            type="password"
+            placeholder="••••••••••"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="w-full px-3 py-2.5 border border-[#DEDBD2] rounded-sm bg-white text-sm outline-none focus:border-[#B5362A]"
+          />
+        </div>
 
+        {error && (
+          <p className="text-[#B5362A] text-[12.5px] mt-3 text-left">{error}</p>
+        )}
 
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e)=>setEmail(e.target.value)}
-      />
-
-
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e)=>setPassword(e.target.value)}
-      />
-
-
-      {
-        error && (
-          <p>
-            {error}
-          </p>
-        )
-      }
-
-
-      <button type="submit">
-        Login
-      </button>
-
-
-    </form>
-
+        <button
+          type="submit"
+          className="w-full mt-6 bg-[#B5362A] hover:bg-[#93281e] text-white text-sm font-medium py-3 rounded-sm transition-colors"
+        >
+          Login
+        </button>
+      </form>
+    </div>
   );
 };
 
-
-export default Login; 
+export default Login;

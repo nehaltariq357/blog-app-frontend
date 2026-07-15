@@ -3,23 +3,27 @@
 import { useEffect, useState } from "react";
 
 export default function LikeCount({ postId }: { postId: number }) {
-    const [count, setCount] = useState(0);
+  const [count, setCount] = useState(0);
 
-    useEffect(() => {
-        async function getLikes() {
-            const res = await fetch("http://localhost:5000/api/likes/count");
+  useEffect(() => {
+    async function getLikes() {
+      const res = await fetch("http://localhost:5000/api/likes/count");
 
-            const data = await res.json();
+      const data = await res.json();
 
-            const post = data.likes.find((post: any) => post.id === postId);
+      const post = data.likes.find((post: any) => post.id === postId);
 
-            if (post) {
-                setCount(post._count.likes);
-            }
-        }
+      if (post) {
+        setCount(post._count.likes);
+      }
+    }
 
-        getLikes();
-    }, [postId]);
+    getLikes();
+  }, [postId]);
 
-    return <span>❤️ {count}</span>;
+  return (
+    <span className="font-mono text-[11px] uppercase tracking-wide text-[#6F6E67]">
+      ♥ {count}
+    </span>
+  );
 }

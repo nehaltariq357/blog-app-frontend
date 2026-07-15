@@ -1,91 +1,36 @@
 "use client";
 
-
-import {useEffect,useState} from "react";
+import { useEffect, useState } from "react";
 import CommentItem from "./CommentItem";
 
+export default function CommentList({ postId }: { postId: number }) {
+  const [comments, setComments] = useState<any[]>([]);
 
-export default function CommentList({
+  async function fetchComments() {
+    const res = await fetch(`http://localhost:5000/api/comments/${postId}`, {
+      cache: "no-store",
+    });
 
-postId
+    const data = await res.json();
 
-}:{
-postId:number
+    setComments(data);
+  }
 
-}){
+  useEffect(() => {
+    fetchComments();
+  }, []);
 
+  return (
+    <div>
+      <h2 className="font-mono text-[11px] uppercase tracking-wide text-[#6F6E67] mb-4">
+        {comments.length} {comments.length === 1 ? "Comment" : "Comments"}
+      </h2>
 
-const [comments,setComments]=useState<any[]>([]);
-
-
-
-async function fetchComments(){
-
-
-const res = await fetch(
-
-`http://localhost:5000/api/comments/${postId}`,
-
-{
-cache:"no-store"
-}
-
-);
-
-
-const data = await res.json();
-
-
-setComments(data);
-
-
-}
-
-
-
-useEffect(()=>{
-
-fetchComments();
-
-},[]);
-
-
-
-return (
-
-<div className="mt-10">
-
-
-<h2 className="text-2xl font-bold mb-5">
-
-Comments ({comments.length})
-
-</h2>
-
-
-
-{
-comments.map((comment)=>(
-
-<CommentItem
-
-key={comment.id}
-
-comment={comment}
-
-refresh={fetchComments}
-
-/>
-
-))
-
-}
-
-
-
-</div>
-
-)
-
-
+      <div>
+        {comments.map((comment) => (
+          <CommentItem key={comment.id} comment={comment} refresh={fetchComments} />
+        ))}
+      </div>
+    </div>
+  );
 }
