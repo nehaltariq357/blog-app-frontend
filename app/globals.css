@@ -1,6 +1,15 @@
 @import "tailwindcss";
 
+.ProseMirror p + p {
+  margin-top: 1.5rem;
+}
 
+.ProseMirror h1,
+.ProseMirror h2,
+.ProseMirror h3 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
 
 
 .ProseMirror{

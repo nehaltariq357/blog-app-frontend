@@ -44,7 +44,7 @@ const Login = () => {
       console.log("Login success:", data);
 
       // login successful
-      router.push("/blog");
+      window.location.href = "/blog";
 
       setEmail("");
       setPassword("");

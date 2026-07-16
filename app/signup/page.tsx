@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function Signup() {
   const [name, setName] = useState("");
@@ -46,6 +47,8 @@ export default function Signup() {
 
       // redirect after success
       router.push("/login");
+
+      // add login button if you have already signed up and want to log in immediately
 
       // clear inputs
       setName("");
@@ -117,6 +120,13 @@ export default function Signup() {
         >
           Signup
         </button>
+
+        <p className="mt-6 text-[12.5px] text-[#6F6E67]">
+          Already have an account?{" "}
+          <Link href="/login" className="text-[#B5362A] hover:text-[#93281e]">
+            Login
+          </Link>
+        </p>
       </form>
     </div>
   );
