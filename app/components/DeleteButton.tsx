@@ -10,7 +10,7 @@ export default function DeleteButton({ id }: { id: number }) {
 
     if (!confirmDelete) return;
 
-    const res = await fetch(`http://localhost:5000/api/posts/${id}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/posts/${id}`, {
       method: "DELETE",
 
       credentials: "include",

@@ -22,7 +22,7 @@ export default function SearchBar() {
 
       try {
         const res = await fetch(
-          `http://localhost:5000/api/posts/search?q=${encodeURIComponent(query)}`
+          `${process.env.NEXT_PUBLIC_API_URL}/api/posts/search?q=${encodeURIComponent(query)}`
         );
 
         const data = await res.json();

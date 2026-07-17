@@ -18,8 +18,8 @@ export default function LikeButton({
       setLoading(true);
 
       const url = liked
-        ? `http://localhost:5000/api/likes/${postId}`
-        : `http://localhost:5000/api/likes/${postId}`;
+        ? `${process.env.NEXT_PUBLIC_API_URL}/api/likes/${postId}`
+        : `${process.env.NEXT_PUBLIC_API_URL}/api/likes/${postId}`;
 
       const res = await fetch(url, {
         method: liked ? "DELETE" : "POST",

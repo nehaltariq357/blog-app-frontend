@@ -7,7 +7,7 @@ export default function LikeCount({ postId }: { postId: number }) {
 
   useEffect(() => {
     async function getLikes() {
-      const res = await fetch("http://localhost:5000/api/likes/count");
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/likes/count`);
 
       const data = await res.json();
 

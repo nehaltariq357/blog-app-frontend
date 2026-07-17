@@ -19,12 +19,13 @@ export default function Signup() {
     setError("");
 
     try {
-      const response = await fetch("http://localhost:5000/api/signup", {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/signup`, {
         method: "POST",
 
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include",
 
         body: JSON.stringify({
           name,
@@ -32,7 +33,7 @@ export default function Signup() {
           password,
         }),
 
-        credentials: "include",
+        
       });
 
       const data = await response.json();

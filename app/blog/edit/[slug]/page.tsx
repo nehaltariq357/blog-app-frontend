@@ -23,7 +23,7 @@ export default function EditPost() {
     async function fetchPost() {
       try {
         const res = await fetch(
-          `http://localhost:5000/api/posts/${slug}`,
+          `${process.env.NEXT_PUBLIC_API_URL}/api/posts/${slug}`,
           {
             credentials: "include",
           }
@@ -53,7 +53,7 @@ export default function EditPost() {
 
     try {
       const res = await fetch(
-        `http://localhost:5000/api/posts/${postId}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/posts/${postId}`,
         {
           method: "PUT",
           headers: {

@@ -2,7 +2,7 @@ import BlogCard from "../BlogCard";
 
 async function getTrendingPosts() {
   try {
-    const res = await fetch("http://localhost:5000/api/trending", {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/trending`, {
       cache: "no-store",
     });
 

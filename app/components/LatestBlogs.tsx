@@ -1,7 +1,7 @@
 import BlogCard from "./../BlogCard";
 
 async function getLatestPosts() {
-  const res = await fetch("http://localhost:5000/api/latest", {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/latest `, {
     cache: "no-store",
   });
 

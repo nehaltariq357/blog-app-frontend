@@ -9,7 +9,7 @@ import LikeButton from "../../components/LikeButton";
 import LikeCount from "../../components/LikeCount";
 
 async function getPost(slug: string) {
-  const res = await fetch(`http://localhost:5000/api/posts/${slug}`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/posts/${slug}`, {
     cache: "no-store",
   });
 

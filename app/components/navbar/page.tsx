@@ -20,7 +20,7 @@ export default function Navbar() {
     async function getUser() {
       try {
         const res = await fetch(
-          "http://localhost:5000/api/current",
+          `${process.env.NEXT_PUBLIC_API_URL}/api/current `,
           {
             credentials: "include",
           }

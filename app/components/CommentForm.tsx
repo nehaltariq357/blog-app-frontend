@@ -17,7 +17,7 @@ export default function CommentForm({
 
     setLoading(true);
 
-    const res = await fetch(`http://localhost:5000/api/comments`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/comments`, {
       method: "POST",
 
       credentials: "include",

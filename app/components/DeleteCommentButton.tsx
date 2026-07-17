@@ -8,7 +8,7 @@ export default function DeleteCommentButton({
   refresh: () => void;
 }) {
   async function deleteComment() {
-    const res = await fetch(`http://localhost:5000/api/comments/${id}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/comments/${id}`, {
       method: "DELETE",
 
       credentials: "include",

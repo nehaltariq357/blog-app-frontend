@@ -17,21 +17,22 @@ const Login = () => {
     setError("");
 
     try {
-      const response = await fetch("http://localhost:5000/api/login", {
-        method: "POST",
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/login`,
+        {
+          method: "POST",
 
-        headers: {
-          "Content-Type": "application/json",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+
+          body: JSON.stringify({
+            email,
+            password,
+          }),
         },
-
-        body: JSON.stringify({
-          email,
-          password,
-        }),
-
-        // JWT cookies ke liye
-        credentials: "include",
-      });
+      );
 
       const data = await response.json();
 
@@ -57,7 +58,10 @@ const Login = () => {
 
   return (
     <div className="min-h-screen bg-[#F6F5F1] flex items-center justify-center px-6">
-      <form onSubmit={handleSubmit} className="w-full max-w-[380px] text-center">
+      <form
+        onSubmit={handleSubmit}
+        className="w-full max-w-[380px] text-center"
+      >
         <div className="font-serif italic font-bold text-[34px] text-[#1A1917] mb-1.5">
           Margin<span className="text-[#B5362A]">al</span>
         </div>
