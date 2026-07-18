@@ -1,36 +1,241 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📝 Blog Platform Frontend
 
-## Getting Started
+A modern **Medium-style Blog Platform Frontend** built with **Next.js, TypeScript, Tailwind CSS, and Tiptap Editor**.
 
-First, run the development server:
+The application provides a clean writing experience with authentication, blog management, search, comments, likes, image uploads, and responsive design.
+
+---
+
+# 🚀 Tech Stack
+
+- Next.js 16
+- React
+- TypeScript
+- Tailwind CSS
+- Tiptap Editor
+- Cloudinary
+- Fetch API
+- JWT Authentication
+- HttpOnly Cookies
+
+---
+
+# ✨ Features
+
+## Authentication
+
+- User Signup
+- User Login
+- Logout
+- Persistent Login using Cookies
+- Protected Routes
+- User Avatar
+
+---
+
+## Blog Management
+
+- Create Blog
+- Edit Blog
+- Delete Blog
+- Rich Text Editor
+- Upload Featured Image
+- Upload Images inside Content
+- Public Blogs
+
+---
+
+## Explore
+
+- Search Blogs
+- Latest Blogs
+- Trending Blogs
+- Responsive Blog Cards
+
+---
+
+## Blog Details
+
+- View Complete Blog
+- Author Information
+- Like Posts
+- Comment System
+- Delete Own Comment
+- Reading Experience
+
+---
+
+## Editor
+
+Built using **Tiptap**
+
+Supports
+
+- Headings
+- Bold
+- Italic
+- Bullet Lists
+- Ordered Lists
+- Links
+- Code Blocks
+- Images
+- Placeholder
+- Rich Text Formatting
+
+---
+
+## Image Upload
+
+Images are uploaded directly to **Cloudinary**.
+
+Supports
+
+- Featured Image
+- Images inside Blog Content
+
+---
+
+## UI
+
+- Responsive Design
+- Mobile Navigation
+- Medium Inspired Layout
+- Clean Typography
+- Loading States
+- Empty States
+
+---
+
+# 📁 Folder Structure
+
+```
+src
+│
+├── app
+│   ├── blog
+│   ├── explore
+│   ├── login
+│   ├── signup
+│   ├── createPost
+│   └── edit
+│
+├── components
+│   ├── Navbar
+│   ├── BlogCard
+│   ├── SearchBar
+│   ├── SearchResults
+│   ├── LatestBlogs
+│   ├── TrendingBlogs
+│   ├── TiptapEditor
+│   ├── Toolbar
+│   ├── ImageUpload
+│   └── ...
+│
+└── lib
+```
+
+---
+
+# ⚙️ Installation
+
+Clone the repository
+
+```bash
+git clone <repository-url>
+```
+
+Go to project
+
+```bash
+cd frontend
+```
+
+Install dependencies
+
+```bash
+npm install
+```
+
+Run development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+# 🔗 Backend API
 
-To learn more about Next.js, take a look at the following resources:
+The frontend communicates with the Express.js backend.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Example
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+POST /api/signup
 
-## Deploy on Vercel
+POST /api/login
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+POST /api/logout
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+GET /api/current
+
+GET /api/posts
+
+GET /api/posts/latest
+
+GET /api/posts/trending
+
+GET /api/posts/search
+
+POST /api/posts
+
+PUT /api/posts/:id
+
+DELETE /api/posts/:id
+
+POST /api/comments
+
+DELETE /api/comments/:id
+
+POST /api/likes/:postId
+
+DELETE /api/likes/:postId
+```
+
+---
+
+# ☁️ Cloudinary
+
+Cloudinary is used for image uploads.
+
+Supports
+
+- Featured Images
+- Rich Text Editor Images
+
+---
+
+# 📱 Responsive
+
+The application is fully responsive and works across
+
+- Desktop
+- Tablet
+- Mobile
+
+---
+
+# 👨‍💻 Author
+
+**Muhammad Nehal Tariq**
+
+
+# ⭐ If you like this project
+
+Give it a ⭐ on GitHub.
